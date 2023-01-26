@@ -13,7 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('projects', function (Blueprint $table) {
+            // vado a creare la colonna della Foreign key
+            $table->unsignedBigInteger('typology_id')->nullable()->after('id');
+            // assegno la foreign key alla colonna creata
+            $table->foreign('typology_id')
+                ->references('id')
+                ->on('typologies')
+                ->onDelete('set null');
+
+        });
+
     }
 
     /**
@@ -23,6 +33,12 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('projects', function (Blueprint $table) {
+            // elimino la foreign key
+            $table->dropForeign(['typology_id']);
+            // eliminazione della colonna
+            $table->dropColumn('typology_id');
+
+        });
     }
 };

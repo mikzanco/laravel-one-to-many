@@ -7,6 +7,7 @@ use App\Http\Requests\ProjectRequest;
 
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Projects;
+use App\Models\Typology;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use SebastianBergmann\CodeCoverage\Report\Xml\Project;
@@ -23,6 +24,11 @@ class ProjectController extends Controller
         $projects = Projects::orderBy('id', 'desc')->paginate(10);
         $direction = 'desc';
         return view('admin.projects.index', compact('projects', 'direction'));
+    }
+
+    public function typologies_project(){
+        $typologies = Typology::all();
+        return view('admin.projects.project_type_list', compact('typologies'));
     }
 
     public function orderby($column, $direction){
@@ -44,7 +50,8 @@ class ProjectController extends Controller
         // $method = 'POST';
         // $projects = null;
         // $title = 'Nuovo Progetto';
-        return view('admin.projects.create',  );
+        $typologies = Typology::all();
+        return view('admin.projects.create',  compact('typologies'));
         // compact('route', 'method', 'title')
     }
 
@@ -104,8 +111,9 @@ class ProjectController extends Controller
     public function edit(Projects $project)
     {
 
+        $typologies = Typology::all();
         $projects = $project;
-        return view('admin.projects.edit', compact('projects'));
+        return view('admin.projects.edit', compact('projects', 'typologies'));
     }
 
     /**

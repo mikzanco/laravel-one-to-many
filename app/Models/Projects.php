@@ -10,7 +10,11 @@ class Projects extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'slug', 'cover_image', 'summary', 'client_name', 'cover_image_original' ];
+    protected $fillable = ['name', 'slug', 'cover_image', 'summary', 'client_name', 'cover_image_original', 'typology_id' ];
+
+    public function typology(){
+        return $this->belongsTo(Typology::class);
+    }
 
     public static function generateSlug($string){
 

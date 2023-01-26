@@ -30,11 +30,11 @@
         <div class="container-fluid main-wrapper">
             <div class="row h-100">
                 @auth
-                <div class="col-1 h-100  bg-dark">
+                <div class="col-2 h-100  bg-dark">
                     @include('admin.partials.aside')
                 </div>
                 @endauth
-                <div class=" @auth col-11 @endauth">
+                <div class=" @auth col-10 @endauth">
                     <main>
                         @yield('content')
                     </main>

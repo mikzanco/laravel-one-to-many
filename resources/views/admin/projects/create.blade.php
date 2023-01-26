@@ -22,6 +22,7 @@
 
     <form action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
+
         <div class="mb-3">
             <label for="name" class="form-label">Nome</label>
             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Nome" value="{{old('name')}}">
@@ -29,6 +30,7 @@
                 <p class="invalid-feedback"> {{$message}} </p>
             @enderror
         </div>
+
         <div class="mb-3">
             <label for="client_name" class="form-label">Nome del cliente</label>
             <input type="text" class="form-control @error('client_name') is-invalid @enderror" id="client_name" name="client_name" placeholder="client_name" value="{{old('client_name')}}">
@@ -36,6 +38,19 @@
                 <p class="invalid-feedback"> {{$message}} </p>
             @enderror
         </div>
+
+        <div class="mb-3">
+            <label for="client_name" class="form-label">Tipologia</label>
+            <select class="form-select" name="typology_id" aria-label="Default select example">
+                <option value="">Selezionare una tipologia</option>
+                @foreach($typologies as $typology)
+                    <option
+                    @if($typology->id == old('$typology->id')) selected @endif
+                    value="{{$typology->id}}">{{$typology->name}}</option>
+                @endforeach
+              </select>
+        </div>
+
         <div class="mb-3">
             <label for="cover_image" class="form-label">Immagine</label>
             <input

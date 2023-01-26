@@ -16,6 +16,7 @@
     @endif
 
     <h1>{{$projects->name}}</h1>
+    <h4>Tipologia: {{$projects->typology->name}}</h4>
 
 
     @if($projects->cover_image)
